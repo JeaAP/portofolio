@@ -897,10 +897,10 @@
 
       const nama = document.getElementById('name').value;
       const email = document.getElementById('email').value;
-      const pesan = document.getElementById('pesan').value;
+      const pesan = document.getElementById('message').value;
 
       const nomor = '6282114611470';
-      const text = `Halo, saya ${nama} (${email}). Saya ada pertanyaan tentang ${pesan}`;
+      const text = encodeURIComponent(`Halo, saya ${nama} (${email}). Saya ada pertanyaan tentang ${pesan}`);
       const url = `https://wa.me/${nomor}?text=${text}`;
 
       window.open(url, '_blank');
