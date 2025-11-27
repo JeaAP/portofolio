@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Anonim | Student & Learner</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #fff9e6 0%, #e3f2fd 50%, #fff3e0 100%);
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ff6b6b;
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 5px;
+    }
+
+    .nav-btn {
+      padding: 10px 20px;
+      background: transparent;
+      border: none;
+      color: #555;
+      cursor: pointer;
+      border-radius: 25px;
+      transition: all 0.3s;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .nav-btn:hover {
+      background: #fff3e0;
+      color: #ff6b6b;
+      transform: translateY(-2px);
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(135deg, #ffd54f, #ffb300);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(255, 179, 0, 0.4);
+    }
+
+    /* Hamburger Menu for Mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #ff6b6b;
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+
+    /* Page System */
+    .page {
+      display: none;
+      min-height: calc(100vh - 80px);
+      padding: 2rem;
+      animation: fadeIn 0.5s;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* HOME PAGE */
+    #home {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: calc(100vh - 80px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .home-decorations {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
+    .floating-emoji {
+      position: absolute;
+      font-size: 3rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(10deg);
+      }
+    }
+
+    .profile-section {
+      position: relative;
+      z-index: 10;
+    }
+
+    .profile-pic {
+      width: 220px;
+      height: 220px;
+      background: linear-gradient(135deg, #ffd54f, #ff6b6b, #42a5f5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7rem;
+      margin: 0 auto 2rem;
+      box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+      border: 5px solid #fff;
+      position: relative;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .status-badge {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #4caf50, #8bc34a);
+      border-radius: 50%;
+      border: 4px solid #fff;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: wiggle 1s infinite;
+    }
+
+    @keyframes wiggle {
+
+      0%,
+      100% {
+        transform: rotate(-10deg);
+      }
+
+      50% {
+        transform: rotate(10deg);
+      }
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ff6b6b, #ffd54f, #42a5f5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+    }
+
+    .subtitle {
+      font-size: 1.8rem;
+      color: #666;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      color: #888;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 15px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ffd54f, #ffb300);
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(255, 179, 0, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(255, 179, 0, 0.6);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: #ff6b6b;
+      border: 3px solid #ff6b6b;
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: #ff6b6b;
+      color: #fff;
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    /* ABOUT PAGE */
+    h2 {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ff6b6b, #ffd54f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+    }
+
+    .page-subtitle {
+      text-align: center;
+      color: #888;
+      margin-bottom: 3rem;
+      font-size: 1.2rem;
+    }
+
+    .about-card {
+      background: #fff;
+      border-radius: 30px;
+      padding: 3rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      border: 3px solid transparent;
+      background-clip: padding-box;
+      position: relative;
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #ffd54f, #ff6b6b, #42a5f5);
+      z-index: -1;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h3 {
+      font-size: 1.8rem;
+      color: #ff6b6b;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    p {
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: #fff9e6;
+      border-radius: 15px;
+      transition: transform 0.3s;
+    }
+
+    ul li:hover {
+      transform: translateX(10px);
+    }
+
+    .icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+
+    .achievements-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 3px dashed #ffd54f;
+    }
+
+    .achievement-item {
+      background: linear-gradient(135deg, #fff9e6, #e3f2fd);
+      padding: 1.5rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+      border-left: 5px solid #ffd54f;
+      transition: all 0.3s;
+    }
+
+    .achievement-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 179, 0, 0.3);
+    }
+
+    .achievement-item h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #ff6b6b;
+      font-weight: 600;
+    }
+
+    /* PORTFOLIO PAGE */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: #fff;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px) rotate(2deg);
+      box-shadow: 0 20px 50px rgba(255, 107, 107, 0.3);
+    }
+
+    .project-image {
+      height: 200px;
+      background: linear-gradient(135deg, #ffd54f, #ff6b6b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-image::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+      }
+
+      100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+      }
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      color: #333;
+      font-weight: 700;
+    }
+
+    .project-description {
+      color: #666;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .project-tag {
+      background: linear-gradient(135deg, #fff9e6, #ffd54f);
+      color: #ff6b6b;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* SKILLS PAGE */
+    .skills-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .skill-item {
+      background: #fff;
+      border-radius: 25px;
+      padding: 2rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(180deg, #ffd54f, #ff6b6b);
+    }
+
+    .skill-item:hover {
+      transform: translateX(10px);
+      box-shadow: 0 20px 50px rgba(255, 179, 0, 0.3);
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .skill-name {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .skill-name h3 {
+      font-size: 1.4rem;
+      margin: 0;
+      color: #333;
+    }
+
+    .skill-percentage {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffd54f, #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .skill-bar-container {
+      width: 100%;
+      height: 15px;
+      background: #f0f0f0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #ffd54f, #ff6b6b);
+      border-radius: 10px;
+      transition: width 1s ease-in-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -100%;
+      }
+
+      100% {
+        left: 200%;
+      }
+    }
+
+    /* CONTACT PAGE */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .contact-form {
+      background: #fff;
+      border-radius: 30px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #555;
+      font-weight: 600;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 15px;
+      background: #f8f8f8;
+      border: 2px solid #e0e0e0;
+      border-radius: 15px;
+      color: #333;
+      font-size: 1rem;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #ffd54f;
+      background: #fff;
+      box-shadow: 0 5px 15px rgba(255, 179, 0, 0.2);
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #ffd54f, #ff6b6b);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 10px 30px rgba(255, 179, 0, 0.4);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(255, 179, 0, 0.6);
+    }
+
+    .social-links {
+      background: #fff;
+      border-radius: 30px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #fff9e6, #e3f2fd);
+      border-radius: 20px;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .social-link:hover {
+      transform: translateY(-5px);
+      border-color: #ffd54f;
+      box-shadow: 0 10px 30px rgba(255, 179, 0, 0.3);
+    }
+
+    .social-icon {
+      font-size: 2.5rem;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-details {
+      flex: 1;
+    }
+
+    .social-label {
+      font-size: 0.9rem;
+      color: #888;
+      font-weight: 500;
+    }
+
+    .social-value {
+      font-weight: 700;
+      color: #333;
+      font-size: 1.1rem;
+    }
+
+    .fun-fact {
+      background: linear-gradient(135deg, #ffd54f, #ff6b6b);
+      border-radius: 25px;
+      padding: 2rem;
+      text-align: center;
+      color: #fff;
+      margin-top: 1rem;
+    }
+
+    .fun-fact h4 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .fun-fact p {
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-buttons {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 1rem;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-buttons.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .profile-pic {
+        width: 180px;
+        height: 180px;
+        font-size: 5rem;
+      }
+
+      .about-card {
+        padding: 1.5rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">🎓</span>
+        <span>My Portfolio</span>
+      </div>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-buttons" id="navMenu">
+        <button class="nav-btn active" onclick="showPage('home')">Home</button>
+        <button class="nav-btn" onclick="showPage('about')">About</button>
+        <button class="nav-btn" onclick="showPage('portfolio')">Portfolio</button>
+        <button class="nav-btn" onclick="showPage('skills')">Skills</button>
+        <button class="nav-btn" onclick="showPage('contact')">Contact</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HOME PAGE -->
+  <div id="home" class="page active">
+    <div class="home-decorations">
+      <span class="floating-emoji" style="top: 10%; left: 10%; animation-delay: 0s;">📚</span>
+      <span class="floating-emoji" style="top: 20%; right: 15%; animation-delay: 0.5s;">✨</span>
+      <span class="floating-emoji" style="bottom: 15%; left: 15%; animation-delay: 1s;">🎨</span>
+      <span class="floating-emoji" style="bottom: 20%; right: 10%; animation-delay: 1.5s;">🚀</span>
+      <span class="floating-emoji" style="top: 50%; left: 5%; animation-delay: 2s;">💡</span>
+      <span class="floating-emoji" style="top: 60%; right: 5%; animation-delay: 2.5s;">🎯</span>
+    </div>
+
+    <div class="profile-section">
+      <div class="profile-pic">
+        😊
+        <div class="status-badge">🌟</div>
+      </div>
+
+      <h1>Hi, I'm <span>Anonim</span></h1>
+      <p class="subtitle">Student & Learner</p>
+      <p class="description">
+        Passionate high school student with big dreams and endless curiosity.
+        Always learning, creating, and exploring new possibilities! ✨
+      </p>
+
+      <div class="cta-buttons">
+        <button class="btn btn-primary" onclick="showPage('portfolio')">
+          See My Projects 🚀
+        </button>
+        <button class="btn btn-secondary" onclick="showPage('contact')">
+          Contact Me 💌
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT PAGE -->
+  <div id="about" class="page">
+    <div class="container">
+      <h2>About Me</h2>
+      <p class="page-subtitle">Getting to know who I am and what I love! 🎉</p>
+
+      <div class="about-card">
+        <div class="about-grid">
+          <div>
+            <h3>📖 Background</h3>
+            <p>
+              Saya adalah siswa SMA yang aktif dan penuh semangat untuk belajar hal-hal baru. Sejak kecil, saya selalu
+              tertarik dengan berbagai bidang mulai dari seni, teknologi, hingga sains.
+            </p>
+            <p>
+              Di sekolah, saya tidak hanya fokus pada pelajaran akademik, tapi juga aktif di berbagai kegiatan
+              ekstrakurikuler yang membantu saya berkembang sebagai individu yang lebih baik.
+            </p>
+          </div>
+
+          <div>
+            <h3>🎯 Interests & Hobbies</h3>
+            <ul>
+              <li>
+                <span class="icon">📚</span>
+                <span>Membaca buku dan artikel tentang berbagai topik</span>
+              </li>
+              <li>
+                <span class="icon">💻</span>
+                <span>Belajar programming dan membuat project digital</span>
+              </li>
+              <li>
+                <span class="icon">🎨</span>
+                <span>Desain grafis dan konten kreatif</span>
+              </li>
+              <li>
+                <span class="icon">🎤</span>
+                <span>Public speaking dan presentasi</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="achievements-section">
+          <h3>🏆 Achievements & Activities</h3>
+          <div class="achievement-item">
+            <h4>Juara 2 Lomba Karya Tulis Ilmiah Tingkat Kota</h4>
+            <p>Menulis penelitian tentang dampak teknologi terhadap gaya belajar siswa modern dan meraih juara 2 dari
+              50+ peserta.</p>
+          </div>
+          <div class="achievement-item">
+            <h4>Ketua OSIS Periode 2024</h4>
+            <p>Memimpin organisasi siswa dengan 30+ anggota dan berhasil mengadakan 5 event sekolah yang sukses.</p>
+          </div>
+          <div class="achievement-item">
+            <h4>Anggota Tim Debat Bahasa Inggris</h4>
+            <p>Aktif dalam kompetisi debat tingkat regional dan mengasah kemampuan berpikir kritis serta public
+              speaking.</p>
+          </div>
+          <div class="achievement-item">
+            <h4>Volunteer di Program Literasi Komunitas</h4>
+            <p>Mengajar anak-anak di komunitas belajar setiap weekend, berbagi ilmu dan menumbuhkan semangat belajar.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO PAGE -->
+  <div id="portfolio" class="page">
+    <div class="container">
+      <h2>My Projects</h2>
+      <p class="page-subtitle">Here are some things I've worked on! 🎨</p>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image">🏆</div>
+          <div class="project-content">
+            <h3 class="project-title">Lomba Karya Tulis Ilmiah</h3>
+            <p class="project-description">
+              Penelitian tentang "Pengaruh Media Sosial terhadap Produktivitas Belajar Siswa" yang meraih juara 2
+              tingkat kota.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Research</span>
+              <span class="project-tag">Writing</span>
+              <span class="project-tag">Analysis</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image" style="background: linear-gradient(135deg, #42a5f5, #1976d2);">🎨</div>
+          <div class="project-content">
+            <h3 class="project-title">Desain Poster Event Sekolah</h3>
+            <p class="project-description">
+              Membuat serangkaian poster promosi untuk kegiatan Festival Seni & Budaya sekolah yang menarik 500+
+              pengunjung.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Design</span>
+              <span class="project-tag">Canva</span>
+              <span class="project-tag">Marketing</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image" style="background: linear-gradient(135deg, #66bb6a, #43a047);">🎥</div>
+          <div class="project-content">
+            <h3 class="project-title">Video Pembelajaran Sejarah</h3>
+            <p class="project-description">
+              Membuat video animasi pendek tentang sejarah Indonesia untuk membantu teman-teman memahami materi dengan
+              cara yang lebih menarik.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Video Editing</span>
+              <span class="project-tag">Animation</span>
+              <span class="project-tag">Education</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image" style="background: linear-gradient(135deg, #ab47bc, #8e24aa);">📊</div>
+          <div class="project-content">
+            <h3 class="project-title">Website Komunitas Belajar</h3>
+            <p class="project-description">
+              Mengembangkan website sederhana untuk komunitas belajar sekolah dengan fitur jadwal, materi, dan forum
+              diskusi.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Web Development</span>
+              <span class="project-tag">HTML/CSS</span>
+              <span class="project-tag">Community</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image" style="background: linear-gradient(135deg, #ffa726, #fb8c00);">🎭</div>
+          <div class="project-content">
+            <h3 class="project-title">Teater Sekolah "Mimpi Nusantara"</h3>
+            <p class="project-description">
+              Menjadi sutradara muda untuk pertunjukan teater sekolah yang melibatkan 20+ siswa dan ditonton 300+ orang.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Theater</span>
+              <span class="project-tag">Directing</span>
+              <span class="project-tag">Art</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image" style="background: linear-gradient(135deg, #26c6da, #00acc1);">📝</div>
+          <div class="project-content">
+            <h3 class="project-title">Blog Pribadi tentang Pendidikan</h3>
+            <p class="project-description">
+              Menulis blog tentang tips belajar efektif, review buku, dan pengalaman sebagai siswa yang aktif di
+              berbagai kegiatan.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Writing</span>
+              <span class="project-tag">Blogging</span>
+              <span class="project-tag">Education</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS PAGE -->
+  <div id="skills" class="page">
+    <div class="container">
+      <h2>My Skills</h2>
+      <p class="page-subtitle">Things I'm good at and still learning! 🌟</p>
+
+      <div class="skills-grid">
+        <div class="skill-item">
+          <div class="skill-header">
+            <div class="skill-name">
+              <span class="icon">🎤</span>
+              <h3>Public Speaking</h3>
+            </div>
+            <div class="skill-percentage">85%</div>
+          </div>
+          <div class="skill-bar-container">
+            <div class="skill-bar" style="width: 85%;"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <div class="skill-name">
+              <span class="icon">👥</span>
+              <h3>Teamwork & Collaboration</h3>
+            </div>
+            <div class="skill-percentage">90%</div>
+          </div>
+          <div class="skill-bar-container">
+            <div class="skill-bar" style="width: 90%;"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <div class="skill-name">
+              <span class="icon">✍️</span>
+              <h3>Creative Writing</h3>
+            </div>
+            <div class="skill-percentage">80%</div>
+          </div>
+          <div class="skill-bar-container">
+            <div class="skill-bar" style="width: 80%;"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <div class="skill-name">
+              <span class="icon">💻</span>
+              <h3>Basic Programming</h3>
+            </div>
+            <div class="skill-percentage">70%</div>
+          </div>
+          <div class="skill-bar-container">
+            <div class="skill-bar" style="width: 70%;"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <div class="skill-name">
+              <span class="icon">🌟</span>
+              <h3>Leadership</h3>
+            </div>
+            <div class="skill-percentage">85%</div>
+          </div>
+          <div class="skill-bar-container">
+            <div class="skill-bar" style="width: 85%;"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <div class="skill-name">
+              <span class="icon">🎨</span>
+              <h3>Graphic Design</h3>
+            </div>
+            <div class="skill-percentage">75%</div>
+          </div>
+          <div class="skill-bar-container">
+            <div class="skill-bar" style="width: 75%;"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <div class="skill-name">
+              <span class="icon">📊</span>
+              <h3>Research & Analysis</h3>
+            </div>
+            <div class="skill-percentage">80%</div>
+          </div>
+          <div class="skill-bar-container">
+            <div class="skill-bar" style="width: 80%;"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <div class="skill-name">
+              <span class="icon">🗣️</span>
+              <h3>English Communication</h3>
+            </div>
+            <div class="skill-percentage">78%</div>
+          </div>
+          <div class="skill-bar-container">
+            <div class="skill-bar" style="width: 78%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div id="contact" class="page">
+    <div class="container">
+      <h2>Get In Touch</h2>
+      <p class="page-subtitle">Let's connect and create something amazing together! 💫</p>
+
+      <div class="contact-grid">
+        <div class="contact-form">
+          <h3>Send Me a Message 💌</h3>
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" placeholder="What's this about?" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Your Message</label>
+              <textarea id="message" rows="5" placeholder="Tell me something awesome..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message 🚀</button>
+          </form>
+        </div>
+
+        <div class="social-links">
+          <h3>Find Me Online 🌐</h3>
+          <div class="social-grid">
+            <a href="#" class="social-link">
+              <div class="social-icon">📷</div>
+              <div class="social-details">
+                <div class="social-label">Instagram</div>
+                <div class="social-value">@anonim_student</div>
+              </div>
+            </a>
+
+            <a href="#" class="social-link">
+              <div class="social-icon">💼</div>
+              <div class="social-details">
+                <div class="social-label">LinkedIn</div>
+                <div class="social-value">Anonim Student</div>
+              </div>
+            </a>
+
+            <a href="#" class="social-link">
+              <div class="social-icon">📧</div>
+              <div class="social-details">
+                <div class="social-label">Email</div>
+                <div class="social-value">anonim.student@email.com</div>
+              </div>
+            </a>
+
+            <a href="#" class="social-link">
+              <div class="social-icon">🎥</div>
+              <div class="social-details">
+                <div class="social-label">YouTube</div>
+                <div class="social-value">Anonim Learning</div>
+              </div>
+            </a>
+
+            <a href="#" class="social-link">
+              <div class="social-icon">🐙</div>
+              <div class="social-details">
+                <div class="social-label">GitHub</div>
+                <div class="social-value">anonim-coder</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="fun-fact">
+            <h4>✨ Fun Fact!</h4>
+            <p>I usually reply within 24 hours! Don't hesitate to reach out for collaboration, questions, or just to say
+              hi! 👋</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Page Navigation
+    function showPage(pageId) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+
+      // Show selected page
+      document.getElementById(pageId).classList.add('active');
+
+      // Update active nav button
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Find and activate the corresponding nav button
+      const navButtons = document.querySelectorAll('.nav-btn');
+      for (let btn of navButtons) {
+        if (btn.textContent.toLowerCase().includes(pageId)) {
+          btn.classList.add('active');
+          break;
+        }
+      }
+
+      // Close mobile menu if open
+      document.getElementById('navMenu').classList.remove('active');
+    }
+
+    // Mobile Menu Toggle
+    function toggleMenu() {
+      document.getElementById('navMenu').classList.toggle('active');
+    }
+
+    // Form Submission
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Thank you for your message! I\'ll get back to you soon. ✨');
+      this.reset();
+    });
+
+    // Animate skill bars when skills page is opened
+    function animateSkillBars() {
+      const skillBars = document.querySelectorAll('.skill-bar');
+      skillBars.forEach(bar => {
+        bar.style.width = '0%';
+        setTimeout(() => {
+          bar.style.width = bar.style.width;
+        }, 100);
+      });
+    }
+
+    // Observe when skills page becomes active
+    const skillsPage = document.getElementById('skills');
+    const observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          if (skillsPage.classList.contains('active')) {
+            animateSkillBars();
+          }
+        }
+      });
+    });
+
+    observer.observe(skillsPage, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    // Add floating emoji positions dynamically
+    document.addEventListener('DOMContentLoaded', function () {
+      const homeSection = document.getElementById('home');
+      const floatingEmojis = homeSection.querySelectorAll('.floating-emoji');
+
+      floatingEmojis.forEach(emoji => {
+        // Add random animation delays for more natural movement
+        const randomDelay = Math.random() * 2;
+        emoji.style.animationDelay = `${randomDelay}s`;
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Anonim | Software Developer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Fira Code', 'Consolas', monospace;
+      background: #0a0a0f;
+      color: #e0e0e0;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.15;
+    }
+
+    .code-line {
+      position: absolute;
+      font-size: 14px;
+      color: #00f2ff;
+      white-space: nowrap;
+      animation: scroll 20s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100vw);
+      }
+    }
+
+    /* Navigation */
+    nav {
+      background: rgba(10, 10, 15, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid #00f2ff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #00f2ff;
+      text-shadow: 0 0 20px rgba(0, 242, 255, 0.8);
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      animation: rotate 4s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 5px;
+    }
+
+    .nav-btn {
+      padding: 10px 20px;
+      background: transparent;
+      border: 2px solid transparent;
+      color: #9ca3af;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s;
+      font-size: 1rem;
+      font-family: inherit;
+      position: relative;
+    }
+
+    .nav-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      background: linear-gradient(45deg, #00f2ff, #a855f7);
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: -1;
+    }
+
+    .nav-btn:hover {
+      color: #fff;
+      border-color: #00f2ff;
+    }
+
+    .nav-btn:hover::before {
+      opacity: 0.2;
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(135deg, #00f2ff, #a855f7);
+      color: #fff;
+      border: none;
+      box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+    }
+
+    /* Page System */
+    .page {
+      display: none;
+      min-height: calc(100vh - 80px);
+      padding: 2rem;
+      animation: fadeIn 0.6s;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* HOME PAGE */
+    #home {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 80px);
+      position: relative;
+    }
+
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .home-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #00f2ff, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .home-content .subtitle {
+      font-size: 1.8rem;
+      color: #9ca3af;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .home-content .description {
+      font-size: 1.1rem;
+      color: #6b7280;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .typing-effect {
+      display: inline-block;
+      border-right: 3px solid #00f2ff;
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      50% {
+        border-color: #00f2ff;
+      }
+
+      51%,
+      100% {
+        border-color: transparent;
+      }
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 15px 35px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
+    }
+
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00f2ff, #a855f7);
+      color: #fff;
+      box-shadow: 0 0 30px rgba(0, 242, 255, 0.5);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 40px rgba(0, 242, 255, 0.8);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #00f2ff;
+      border: 2px solid #00f2ff;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 242, 255, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .home-illustration {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .code-window {
+      background: #1a1a2e;
+      border: 2px solid #00f2ff;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 0 50px rgba(0, 242, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .code-window::before {
+      content: '● ● ●';
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      color: #00f2ff;
+      font-size: 1.5rem;
+      letter-spacing: 5px;
+    }
+
+    .code-content {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #a855f7;
+    }
+
+    .code-content .keyword {
+      color: #00f2ff;
+    }
+
+    .code-content .string {
+      color: #4ade80;
+    }
+
+    .avatar {
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, #00f2ff, #a855f7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      margin: 2rem auto;
+      box-shadow: 0 0 50px rgba(0, 242, 255, 0.5);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* ABOUT PAGE */
+    h2 {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #00f2ff, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+    }
+
+    .page-subtitle {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 3rem;
+      font-size: 1.2rem;
+    }
+
+    .about-card {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border: 2px solid #00f2ff;
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: 0 0 50px rgba(0, 242, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 242, 255, 0.1) 0%, transparent 70%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+      }
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    h3 {
+      font-size: 1.8rem;
+      color: #00f2ff;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+    }
+
+    p {
+      line-height: 1.8;
+      color: #d1d5db;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: rgba(0, 242, 255, 0.05);
+      border-left: 3px solid #a855f7;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+
+    ul li:hover {
+      background: rgba(0, 242, 255, 0.1);
+      transform: translateX(10px);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+    }
+
+    .icon {
+      font-size: 1.5rem;
+      color: #00f2ff;
+    }
+
+    /* PORTFOLIO PAGE */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border: 2px solid transparent;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(45deg, #00f2ff, #a855f7, #00f2ff);
+      border-radius: 20px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 50px rgba(0, 242, 255, 0.4);
+    }
+
+    .project-image {
+      height: 200px;
+      background: linear-gradient(135deg, #00f2ff, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .project-link {
+      padding: 10px 20px;
+      background: #00f2ff;
+      color: #0a0a0f;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .project-link:hover {
+      background: #a855f7;
+      transform: scale(1.1);
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      color: #00f2ff;
+      font-weight: 700;
+    }
+
+    .project-description {
+      color: #9ca3af;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tech-tag {
+      padding: 5px 12px;
+      background: rgba(168, 85, 247, 0.2);
+      color: #a855f7;
+      border: 1px solid #a855f7;
+      border-radius: 15px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* SKILLS PAGE */
+    .skills-grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .skill-category {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border: 2px solid #00f2ff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+    }
+
+    .skill-category h3 {
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .skill-items {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .skill-item {
+      position: relative;
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-name {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: #e0e0e0;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .skill-percentage {
+      color: #00f2ff;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .skill-bar-container {
+      width: 100%;
+      height: 12px;
+      background: rgba(0, 242, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skill-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #00f2ff, #a855f7);
+      border-radius: 10px;
+      position: relative;
+      transition: width 1.5s ease-in-out;
+      box-shadow: 0 0 20px rgba(0, 242, 255, 0.6);
+    }
+
+    .skill-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      100% {
+        left: 100%;
+      }
+    }
+
+    /* CONTACT PAGE */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .contact-form {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border: 2px solid #00f2ff;
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 0 50px rgba(0, 242, 255, 0.2);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #00f2ff;
+      font-weight: 600;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      background: rgba(0, 242, 255, 0.05);
+      border: 2px solid rgba(0, 242, 255, 0.3);
+      border-radius: 8px;
+      color: #e0e0e0;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #00f2ff;
+      background: rgba(0, 242, 255, 0.1);
+      box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #00f2ff, #a855f7);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 0 30px rgba(0, 242, 255, 0.5);
+      font-family: inherit;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 40px rgba(0, 242, 255, 0.8);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .info-card {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border: 2px solid #a855f7;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.2);
+    }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem;
+      background: rgba(0, 242, 255, 0.05);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #e0e0e0;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      border-color: #00f2ff;
+      background: rgba(0, 242, 255, 0.1);
+      transform: translateX(10px);
+      box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+    }
+
+    .social-icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #00f2ff, #a855f7);
+      border-radius: 50%;
+      font-size: 1.5rem;
+      box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+    }
+
+    .social-details {
+      flex: 1;
+    }
+
+    .social-label {
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .social-value {
+      font-weight: 700;
+      color: #00f2ff;
+      font-size: 1.1rem;
+    }
+
+    .availability {
+      background: linear-gradient(135deg, #00f2ff, #a855f7);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      color: #fff;
+    }
+
+    .availability h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .home-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .nav-buttons {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 15, 0.98);
+        padding: 1rem;
+        border-bottom: 2px solid #00f2ff;
+      }
+
+      .nav-buttons.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+      }
+
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: #00f2ff;
+        border-radius: 3px;
+      }
+    }
+
+    .hamburger {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-animation">
+    <div class="code-line" style="top: 10%;">const developer = { name: "Anonim", role: "Software Developer" };</div>
+    <div class="code-line" style="top: 30%; animation-delay: 2s;">function buildAmazingThings() { return creativity +
+      code; }</div>
+    <div class="code-line" style="top: 50%; animation-delay: 4s;">if (problem) { findSolution(); } else {
+      createInnovation(); }</div>
+    <div class="code-line" style="top: 70%; animation-delay: 6s;">while (learning) { skills++; experience++; }</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">⚙️</span>
+        <span>&lt;/Dev&gt;</span>
+      </div>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-buttons" id="navMenu">
+        <button class="nav-btn active" onclick="showPage('home')">Home</button>
+        <button class="nav-btn" onclick="showPage('about')">About</button>
+        <button class="nav-btn" onclick="showPage('portfolio')">Portfolio</button>
+        <button class="nav-btn" onclick="showPage('skills')">Skills</button>
+        <button class="nav-btn" onclick="showPage('contact')">Contact</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HOME PAGE -->
+  <div id="home" class="page active">
+    <div class="container">
+      <div class="home-grid">
+        <div class="home-content">
+          <h1>Hi, I'm <span class="typing-effect">Anonim</span></h1>
+          <p class="subtitle">Software Developer & Problem Solver</p>
+          <p class="description">
+            Passionate about creating elegant solutions through code.
+            Specializing in building robust applications and turning complex problems into simple, beautiful solutions.
+          </p>
+
+          <div class="cta-buttons">
+            <button class="btn btn-primary" onclick="showPage('portfolio')">
+              Explore My Projects →
+            </button>
+            <button class="btn btn-secondary" onclick="showPage('contact')">
+              Hire Me 💼
+            </button>
+          </div>
+        </div>
+
+        <div class="home-illustration">
+          <div class="code-window">
+            <div class="avatar">👨‍💻</div>
+            <div class="code-content">
+              <div><span class="keyword">class</span> Developer {</div>
+              <div>&nbsp;&nbsp;<span class="keyword">constructor</span>() {</div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.name = <span
+                  class="string">"Anonim"</span>;</div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.passion = <span
+                  class="string">"Coding"</span>;</div>
+              <div>&nbsp;&nbsp;}</div>
+              <div>}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT PAGE -->
+  <div id="about" class="page">
+    <div class="container">
+      <h2>&lt;About Me /&gt;</h2>
+      <p class="page-subtitle">// Journey of a passionate software developer</p>
+
+      <div class="about-card">
+        <div class="about-grid">
+          <div>
+            <h3>💻 Background</h3>
+            <p>
+              Saya adalah siswa jurusan Rekayasa Perangkat Lunak (RPL) yang memiliki passion mendalam dalam dunia
+              programming dan pengembangan aplikasi. Sejak pertama kali menulis kode, saya jatuh cinta dengan bagaimana
+              logika dapat diubah menjadi solusi nyata.
+            </p>
+            <p>
+              Melalui pembelajaran intensif di sekolah dan eksplorasi mandiri, saya terus mengasah kemampuan dalam
+              membangun aplikasi yang tidak hanya fungsional, tetapi juga efisien dan user-friendly.
+            </p>
+          </div>
+
+          <div>
+            <h3>🎯 Focus & Expertise</h3>
+            <ul>
+              <li>
+                <span class="icon">🌐</span>
+                <span>Pengembangan aplikasi web full-stack dengan teknologi modern</span>
+              </li>
+              <li>
+                <span class="icon">📱</span>
+                <span>Pembuatan sistem informasi dan aplikasi desktop</span>
+              </li>
+              <li>
+                <span class="icon">🔍</span>
+                <span>Problem solving dan algoritma pemrograman</span>
+              </li>
+              <li>
+                <span class="icon">👥</span>
+                <span>Kolaborasi tim dalam proyek pengembangan software</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid rgba(0, 242, 255, 0.3);">
+          <h3>🚀 Development Philosophy</h3>
+          <p style="color: #9ca3af; font-size: 1.1rem; line-height: 1.8;">
+            "Code is not just about making things work—it's about creating solutions that are efficient, maintainable,
+            and scalable.
+            I believe in writing clean code that not only computers understand, but also humans."
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO PAGE -->
+  <div id="portfolio" class="page">
+    <div class="container">
+      <h2>&lt;My Projects /&gt;</h2>
+      <p class="page-subtitle">// Showcase of my development work</p>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image">
+            💰
+            <div class="project-overlay">
+              <a href="#" class="project-link">Live Demo</a>
+              <a href="#" class="project-link">GitHub</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Aplikasi Kasir dengan Java</h3>
+            <p class="project-description">
+              Aplikasi desktop untuk manajemen transaksi penjualan dengan fitur inventory, laporan penjualan, dan sistem
+              kasir yang user-friendly.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Java</span>
+              <span class="tech-tag">JavaFX</span>
+              <span class="tech-tag">MySQL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image" style="background: linear-gradient(135deg, #a855f7, #7c3aed);">
+            🏫
+            <div class="project-overlay">
+              <a href="#" class="project-link">Live Demo</a>
+              <a href="#" class="project-link">GitHub</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Website Sekolah Modern</h3>
+            <p class="project-description">
+              Website responsive untuk sekolah dengan sistem manajemen konten, portal berita, dan informasi akademik
+              yang terintegrasi.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">HTML/CSS</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">MySQL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image" style="background: linear-gradient(135deg, #4ade80, #16a34a);">
+            📊
+            <div class="project-overlay">
+              <a href="#" class="project-link">Live Demo</a>
+              <a href="#" class="project-link">GitHub</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Sistem Absensi Online</h3>
+            <p class="project-description">
+              Sistem absensi digital dengan QR code scanning, laporan kehadiran real-time, dan dashboard admin untuk
+              monitoring.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag">QR Code</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+            🎮
+            <div class="project-overlay">
+              <a href="#" class="project-link">Live Demo</a>
+              <a href="#" class="project-link">GitHub</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Game Sederhana dengan Python</h3>
+            <p class="project-description">
+              Game arcade klasik "Space Invaders" yang dikembangkan menggunakan Pygame dengan mekanik scoring dan
+              multiple levels.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Pygame</span>
+              <span class="tech-tag">OOP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+            📝
+            <div class="project-overlay">
+              <a href="#" class="project-link">Live Demo</a>
+              <a href="#" class="project-link">GitHub</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Aplikasi To-Do List</h3>
+            <p class="project-description">
+              Aplikasi manajemen tugas dengan fitur drag & drop, kategori, deadline reminder, dan sinkronisasi cloud.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">MongoDB</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+            🛒
+            <div class="project-overlay">
+              <a href="#" class="project-link">Live Demo</a>
+              <a href="#" class="project-link">GitHub</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">E-Commerce Mini</h3>
+            <p class="project-description">
+              Platform e-commerce sederhana dengan sistem keranjang belanja, checkout, dan manajemen produk untuk UKM.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Laravel</span>
+              <span class="tech-tag">Vue.js</span>
+              <span class="tech-tag">MySQL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS PAGE -->
+  <div id="skills" class="page">
+    <div class="container">
+      <h2>&lt;My Skills /&gt;</h2>
+      <p class="page-subtitle">// Technologies and tools I work with</p>
+
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>💻 Frontend Development</h3>
+          <div class="skill-items">
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">
+                  <span>HTML5 & CSS3</span>
+                </div>
+                <div class="skill-percentage">90%</div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-bar" style="width: 90%;"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">
+                  <span>JavaScript (ES6+)</span>
+                </div>
+                <div class="skill-percentage">85%</div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-bar" style="width: 85%;"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">
+                  <span>React.js</span>
+                </div>
+                <div class="skill-percentage">75%</div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-bar" style="width: 75%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>⚙️ Backend Development</h3>
+          <div class="skill-items">
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">
+                  <span>PHP & Laravel</span>
+                </div>
+                <div class="skill-percentage">80%</div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-bar" style="width: 80%;"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">
+                  <span>Python & Django</span>
+                </div>
+                <div class="skill-percentage">70%</div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-bar" style="width: 70%;"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">
+                  <span>Node.js</span>
+                </div>
+                <div class="skill-percentage">65%</div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-bar" style="width: 65%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>🗄️ Database & Tools</h3>
+          <div class="skill-items">
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">
+                  <span>MySQL & Database Design</span>
+                </div>
+                <div class="skill-percentage">85%</div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-bar" style="width: 85%;"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">
+                  <span>Git & GitHub</span>
+                </div>
+                <div class="skill-percentage">80%</div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-bar" style="width: 80%;"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">
+                  <span>RESTful APIs</span>
+                </div>
+                <div class="skill-percentage">75%</div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-bar" style="width: 75%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>🎯 Soft Skills</h3>
+          <div class="skill-items">
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">
+                  <span>Problem Solving</span>
+                </div>
+                <div class="skill-percentage">90%</div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-bar" style="width: 90%;"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">
+                  <span>Team Collaboration</span>
+                </div>
+                <div class="skill-percentage">88%</div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-bar" style="width: 88%;"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <div class="skill-name">
+                  <span>Project Management</span>
+                </div>
+                <div class="skill-percentage">78%</div>
+              </div>
+              <div class="skill-bar-container">
+                <div class="skill-bar" style="width: 78%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div id="contact" class="page">
+    <div class="container">
+      <h2>&lt;Get In Touch /&gt;</h2>
+      <p class="page-subtitle">// Let's build something amazing together</p>
+
+      <div class="contact-grid">
+        <div class="contact-form">
+          <h3>📧 Send Message</h3>
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+              <label for="subject">Project Type</label>
+              <input type="text" id="subject" placeholder="e.g., Web Development, Mobile App" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Project Details</label>
+              <textarea id="message" rows="5" placeholder="Describe your project requirements..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message 🚀</button>
+          </form>
+        </div>
+
+        <div class="contact-info">
+          <div class="info-card">
+            <h3>🌐 Connect With Me</h3>
+            <div class="social-links">
+              <a href="#" class="social-link">
+                <div class="social-icon">🐙</div>
+                <div class="social-details">
+                  <div class="social-label">GitHub</div>
+                  <div class="social-value">github.com/anonim-dev</div>
+                </div>
+              </a>
+
+              <a href="#" class="social-link">
+                <div class="social-icon">💼</div>
+                <div class="social-details">
+                  <div class="social-label">LinkedIn</div>
+                  <div class="social-value">linkedin.com/in/anonim-dev</div>
+                </div>
+              </a>
+
+              <a href="#" class="social-link">
+                <div class="social-icon">📧</div>
+                <div class="social-details">
+                  <div class="social-label">Email</div>
+                  <div class="social-value">anonim.dev@email.com</div>
+                </div>
+              </a>
+
+              <a href="#" class="social-link">
+                <div class="social-icon">📱</div>
+                <div class="social-details">
+                  <div class="social-label">Portfolio</div>
+                  <div class="social-value">anonim-dev.portfolio.com</div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="availability">
+            <h4>🚀 Available for Projects</h4>
+            <p>I'm currently available for freelance work and collaboration. Let's discuss your next project!</p>
+          </div>
+
+          <div class="info-card">
+            <h3>📞 Quick Response</h3>
+            <p style="color: #9ca3af; margin-bottom: 1rem;">I typically respond within 24 hours. For urgent matters,
+              feel
+              free to reach out directly via email.</p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <div style="background: rgba(0, 242, 255, 0.1); padding: 1rem; border-radius: 8px; flex: 1;">
+                <div style="color: #00f2ff; font-weight: 600;">Response Time</div>
+                <div style="color: #e0e0e0;">
+                  < 24 hours</div>
+                </div>
+                <div style="background: rgba(168, 85, 247, 0.1); padding: 1rem; border-radius: 8px; flex: 1;">
+                  <div style="color: #a855f7; font-weight: 600;">Availability</div>
+                  <div style="color: #e0e0e0;">Open for work</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Page Navigation
+      function showPage(pageId) {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(page => {
+          page.classList.remove('active');
+        });
+
+        // Show selected page
+        document.getElementById(pageId).classList.add('active');
+
+        // Update active nav button
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+
+        // Find and activate the corresponding nav button
+        const navButtons = document.querySelectorAll('.nav-btn');
+        for (let btn of navButtons) {
+          if (btn.textContent.toLowerCase().includes(pageId)) {
+            btn.classList.add('active');
+            break;
+          }
+        }
+
+        // Close mobile menu if open
+        document.getElementById('navMenu').classList.remove('active');
+      }
+
+      // Mobile Menu Toggle
+      function toggleMenu() {
+        document.getElementById('navMenu').classList.toggle('active');
+      }
+
+      // Form Submission
+      document.getElementById('contactForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Thank you for your message! I\'ll get back to you within 24 hours. 🚀');
+        this.reset();
+      });
+
+      // Animate skill bars when skills page is opened
+      function animateSkillBars() {
+        const skillBars = document.querySelectorAll('.skill-bar');
+        skillBars.forEach(bar => {
+          const width = bar.style.width;
+          bar.style.width = '0%';
+          setTimeout(() => {
+            bar.style.width = width;
+          }, 100);
+        });
+      }
+
+      // Observe when skills page becomes active
+      const skillsPage = document.getElementById('skills');
+      const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            if (skillsPage.classList.contains('active')) {
+              animateSkillBars();
+            }
+          }
+        });
+      });
+
+      observer.observe(skillsPage, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+
+      // Typing effect for home page
+      function initTypingEffect() {
+        const typingElement = document.querySelector('.typing-effect');
+        const texts = ['Software Developer', 'Problem Solver', 'Full-Stack Developer', 'Tech Enthusiast'];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+          const currentText = texts[textIndex];
+
+          if (isDeleting) {
+            typingElement.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+          } else {
+            typingElement.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
+          }
+
+          if (!isDeleting && charIndex === currentText.length) {
+            isDeleting = true;
+            setTimeout(type, 2000);
+          } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+            setTimeout(type, 500);
+          } else {
+            setTimeout(type, isDeleting ? 100 : 150);
+          }
+        }
+
+        setTimeout(type, 1000);
+      }
+
+      // Initialize when page loads
+      document.addEventListener('DOMContentLoaded', function () {
+        initTypingEffect();
+
+        // Add more code lines for background animation
+        const bgAnimation = document.querySelector('.bg-animation');
+        const codeLines = [
+          'console.log("Building amazing software...");',
+          'const passion = "Clean Code + Creative Solutions";',
+          'async function deliverQuality() { return await bestPractices; }',
+          '// Always learning, always coding 💻',
+          'const goals = ["Master New Tech", "Build Impactful Apps"];',
+          'if (challenge) { embraceChallenge(); } else { findNewChallenge(); }'
+        ];
+
+        codeLines.forEach((line, index) => {
+          const codeLine = document.createElement('div');
+          codeLine.className = 'code-line';
+          codeLine.textContent = line;
+          codeLine.style.top = `${15 + (index * 12)}%`;
+          codeLine.style.animationDelay = `${index * 3}s`;
+          bgAnimation.appendChild(codeLine);
+        });
+      });
+    </script>
+</body>
+
+</html>
