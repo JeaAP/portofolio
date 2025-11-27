@@ -789,20 +789,20 @@
 
   <!-- Contact Section -->
   <section id="contact">
-    <h2 class="section-title">Hubungi Saya</h2>
+    <h2 class="section-title">Hubungi Saya Melalui Whatsapp</h2>
     <div class="contact-container">
-      <form class="contact-form">
+      <form class="contact-form" id="contactForm">
         <div class="form-group">
           <label>Nama</label>
-          <input type="text" placeholder="Nama Anda" required>
+          <input type="text" id="name" placeholder="Nama Anda" required>
         </div>
         <div class="form-group">
           <label>Email</label>
-          <input type="email" placeholder="email@example.com" required>
+          <input type="email" id="email" placeholder="email@example.com" required>
         </div>
         <div class="form-group">
           <label>Pesan</label>
-          <textarea rows="5" placeholder="Tulis pesan Anda..." required></textarea>
+          <textarea rows="5" id="message" placeholder="Tulis pesan Anda..." required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Kirim Pesan</button>
       </form>
@@ -812,6 +812,9 @@
           <a href="mailto:brilliantezekiel34@gmail.com" class="social-link">
             📧 Email
           </a>
+          <a href="https://wa.me/6282114611470" class="social-link">
+            📱 Whatsapp
+          </a>b
         </div>
         <p style="margin-top: 2rem; color: #666;">Saya selalu terbuka untuk diskusi peluang
           kolaborasi, atau sekadar bertukar ide!</p>
@@ -889,10 +892,19 @@
     }
 
     // Form Submission
-    document.querySelector('.contact-form').addEventListener('submit', (e) => {
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      alert('Terima kasih! Pesan Anda telah terkirim.');
-      e.target.reset();
+
+      const nama = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const pesan = document.getElementById('pesan').value;
+
+      const nomor = '6282114611470';
+      const text = `Halo, saya ${nama} (${email}). Saya ada pertanyaan tentang ${pesan}`;
+      const url = `https://wa.me/${nomor}?text=${text}`;
+
+      window.open(url, '_blank');
+      this.reset();
     });
 
     // Navbar Background on Scroll
