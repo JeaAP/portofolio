@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brilliant Ezekiel - Student Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-blue: #1e88e5;
+      --secondary-blue: #42a5f5;
+      --light-blue: #bbdefb;
+      --accent-blue: #0d47a1;
+      --white: #ffffff;
+      --text-dark: #1a237e;
+      --gradient: linear-gradient(135deg, #1e88e5 0%, #0d47a1 100%);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-color: #e3f2fd;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(13, 71, 161, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-blue);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--accent-blue);
+      margin: 3px 0;
+      transition: 0.3s;
+    }
+
+    /* Section Styles */
+    section {
+      min-height: 100vh;
+      padding: 100px 5% 50px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Home Section */
+    #home {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1e88e5 0%, #0d47a1 100%);
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #home::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: moveBackground 20s linear infinite;
+    }
+
+    @keyframes moveBackground {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(50px, 50px);
+      }
+    }
+
+    /* Rocket Animation */
+    .rocket {
+      position: absolute;
+      font-size: 2rem;
+      animation: flyRocket 15s linear infinite;
+      opacity: 0.7;
+      z-index: 1;
+    }
+
+    @keyframes flyRocket {
+      0% {
+        transform: translate(-100px, 100vh) rotate(45deg);
+      }
+
+      10% {
+        transform: translate(10vw, 80vh) rotate(45deg);
+      }
+
+      20% {
+        transform: translate(20vw, 60vh) rotate(45deg);
+      }
+
+      30% {
+        transform: translate(30vw, 40vh) rotate(45deg);
+      }
+
+      40% {
+        transform: translate(40vw, 20vh) rotate(45deg);
+      }
+
+      50% {
+        transform: translate(50vw, 10vh) rotate(45deg);
+      }
+
+      60% {
+        transform: translate(60vw, 20vh) rotate(45deg);
+      }
+
+      70% {
+        transform: translate(70vw, 40vh) rotate(45deg);
+      }
+
+      80% {
+        transform: translate(80vw, 60vh) rotate(45deg);
+      }
+
+      90% {
+        transform: translate(90vw, 80vh) rotate(45deg);
+      }
+
+      100% {
+        transform: translate(100vw, 100vh) rotate(45deg);
+      }
+    }
+
+    .home-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #64b5f6, #bbdefb);
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      animation: float 3s ease-in-out infinite;
+      border: 4px solid white;
+    }
+
+    .profile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .home-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .home-content p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--accent-blue);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: var(--accent-blue);
+    }
+
+    /* About Section */
+    #about {
+      background: var(--light-blue);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: var(--accent-blue);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary-blue);
+      border-radius: 2px;
+    }
+
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 3rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(13, 71, 161, 0.1);
+    }
+
+    .about-content p {
+      margin-bottom: 1.5rem;
+      text-align: justify;
+      line-height: 1.8;
+    }
+
+    .values {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .value-item {
+      flex: 1;
+      min-width: 200px;
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--light-blue);
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .value-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .value-item h3 {
+      color: var(--accent-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .value-item p {
+      font-weight: 300;
+      text-align: center;
+    }
+
+    /* Portfolio Section */
+    #portfolio {
+      background: white;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .portfolio-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(13, 71, 161, 0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 1px solid var(--light-blue);
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(13, 71, 161, 0.15);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #1e88e5, #0d47a1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: white;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-content h3 {
+      color: var(--accent-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-content p {
+      margin-bottom: 1rem;
+      color: #666;
+    }
+
+    /* Skills Section */
+    #skills {
+      background: var(--light-blue);
+    }
+
+    .skills-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .skill-category {
+      background: white;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(13, 71, 161, 0.1);
+    }
+
+    .skill-category h3 {
+      color: var(--accent-blue);
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .skill-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-name {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-bar {
+      width: 100%;
+      height: 10px;
+      background: var(--light-blue);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+      border-radius: 5px;
+      transition: width 1s ease;
+    }
+
+    /* Contact Section */
+    #contact {
+      background: white;
+    }
+
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      margin-bottom: 0.5rem;
+      color: var(--accent-blue);
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 12px;
+      border: 2px solid var(--light-blue);
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      padding: 10px 20px;
+      background: var(--light-blue);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--accent-blue);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .social-link:hover {
+      background: var(--primary-blue);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--accent-blue);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        right: -100%;
+        flex-direction: column;
+        background: white;
+        width: 100%;
+        padding: 2rem;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .home-content h1 {
+        font-size: 2rem;
+      }
+
+      .home-content p {
+        font-size: 1.1rem;
+      }
+
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 80px 5% 30px;
+      }
+
+      .rocket {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Brilliant Ezekiel</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#portfolio">Kegiatan</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Home Section -->
+  <section id="home" class="visible">
+    <!-- Rocket Animations -->
+    <div class="rocket" style="top: 10%; animation-delay: 0s;">🚀</div>
+    <div class="rocket" style="top: 30%; animation-delay: 3s;">🛰️</div>
+    <div class="rocket" style="top: 50%; animation-delay: 6s;">✈️</div>
+    <div class="rocket" style="top: 70%; animation-delay: 9s;">🛸</div>
+    <div class="rocket" style="top: 20%; animation-delay: 12s;">🚁</div>
+
+    <div class="home-content">
+      <div class="profile-img">
+        <img src="./image.png" alt="Profile Picture">
+      </div>
+      <h1>Halo, Saya Brilliant Ezekiel</h1>
+      <p>Seorang siswa SMA yang memiliki ketertarikan di bidang teknologi dan fisika</p>
+      <div class="cta-buttons">
+        <a href="#about" class="btn btn-primary">Tentang Saya</a>
+        <a href="#contact" class="btn btn-secondary">Kontak Saya</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2 class="section-title">Tentang Saya</h2>
+    <div class="about-content">
+      <p>Saya adalah siswa SMA yang mengambil peminatan Fisika, Matematika lanjutan dan Informatika yang memiliki
+        passion
+        mendalam dalam bidang Technology dan Kelistrikan pada pelajaran fisika.Sejak awal belajar, saya tertarik dengan
+        bagaimana teknologi dapat mengatur dan mengefisienkan listrik pada suatu rangkaian.
+      </p>
+      <p>Melalui pembelajaran teori dan praktik di sekolah, saya terus mengembangkan kemampuan dalam merancang,
+        membangun, dan
+        mengelola Rangkaian listrik yang menggunakan teknologi yang efisien dan aman.</p>
+      <div class="values">
+        <div class="value-item">
+          <h3>🔍 Rasa Ingin Tahu</h3>
+          <p>Selalu mencari pengetahuan baru</p>
+        </div>
+        <div class="value-item">
+          <h3>⚡ Disiplin</h3>
+          <p>Konsisten dalam setiap langkah</p>
+        </div>
+        <div class="value-item">
+          <h3>📚 Belajar Mandiri</h3>
+          <p>Proaktif dalam mengembangkan diri</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio">
+    <h2 class="section-title">Karya & Kegiatan</h2>
+    <div class="portfolio-grid">
+
+      <div class="portfolio-card">
+        <div class="card-img">📘</div>
+        <div class="card-content">
+          <h3>P5 Project</h3>
+          <p>Kegiatan pembelajaran berbasis proyek yang mengeksplorasi isu nyata dan mengembangkan keterampilan praktis.
+          </p>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="card-img">🔌</div>
+        <div class="card-content">
+          <h3>Proyek Listrik</h3>
+          <p>Praktek membuat rangkaian listrik dan memahami cara kerja komponen dasar elektronik.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <h2 class="section-title">Keahlian</h2>
+    <div class="skills-container">
+      <div class="skill-category">
+        <h3>📖 Academic Skills</h3>
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Matematika & Sains</span>
+            <span>95%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 0%" data-width="95%"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Bahasa & Komunikasi</span>
+            <span>85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 0%" data-width="85%"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Penelitian & Analisis</span>
+            <span>90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 0%" data-width="90%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3>🎨 Creative Skills</h3>
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Desain Grafis</span>
+            <span>75%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 0%" data-width="75%"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Penulisan Kreatif</span>
+            <span>90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 0%" data-width="90%"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Presentasi & Public Speaking</span>
+            <span>80%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 0%" data-width="80%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3>💻 Technical Skills</h3>
+
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Electricity</span>
+            <span>85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 0%" data-width="85%"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Electrical Damage Analysis</span>
+            <span>80%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 0%" data-width="80%"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Electrical Circuit</span>
+            <span>85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 0%" data-width="85%"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2 class="section-title">Hubungi Saya</h2>
+    <div class="contact-container">
+      <form class="contact-form">
+        <div class="form-group">
+          <label>Nama</label>
+          <input type="text" placeholder="Nama Anda" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="email@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Pesan</label>
+          <textarea rows="5" placeholder="Tulis pesan Anda..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+      </form>
+      <div class="contact-info">
+        <h3>Terhubung dengan Saya</h3>
+        <div class="social-links">
+          <a href="mailto:brilliantezekiel34@gmail.com" class="social-link">
+            📧 Email
+          </a>
+        </div>
+        <p style="margin-top: 2rem; color: #666;">Saya selalu terbuka untuk diskusi peluang
+          kolaborasi, atau sekadar bertukar ide!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Brilliant Ezekiel. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Hamburger Menu
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when link clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Smooth Scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    });
+
+    // Scroll Animation
+    const sections = document.querySelectorAll('section');
+
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+
+          // Animate skill bars when skills section is visible
+          if (entry.target.id === 'skills') {
+            animateSkillBars();
+          }
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    // Skill Bar Animation
+    function animateSkillBars() {
+      const skillBars = document.querySelectorAll('.skill-progress');
+      skillBars.forEach(bar => {
+        const width = bar.getAttribute('data-width');
+        setTimeout(() => {
+          bar.style.width = width;
+        }, 200);
+      });
+    }
+
+    // Form Submission
+    document.querySelector('.contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Terima kasih! Pesan Anda telah terkirim.');
+      e.target.reset();
+    });
+
+    // Navbar Background on Scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 100) {
+        nav.style.background = 'rgba(255, 255, 255, 0.98)';
+        nav.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.15)';
+      } else {
+        nav.style.background = 'rgba(255, 255, 255, 0.95)';
+        nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+      }
+    });
+
+    // Create additional rockets dynamically
+    function createRockets() {
+      const homeSection = document.getElementById('home');
+      for (let i = 0; i < 3; i++) {
+        const rocket = document.createElement('div');
+        rocket.className = 'rocket';
+        rocket.innerHTML = '🚀';
+        rocket.style.left = `${Math.random() * 10}%`;
+        rocket.style.animationDelay = `${Math.random() * 15}s`;
+        homeSection.appendChild(rocket);
+      }
+    }
+
+    // Initialize rockets
+    document.addEventListener('DOMContentLoaded', createRockets);
+  </script>
+</body>
+
+</html>
